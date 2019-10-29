@@ -26,10 +26,10 @@
     [java.nio.charset StandardCharsets]
     [java.net IDN URL URLEncoder URLDecoder]))
 
-;; Cheshire is an optional dependency, so we check for it at compile time.
+;; jsonista is an optional dependency, so we check for it at compile time.
 (def json-enabled?
   (try
-    (require 'cheshire.core)
+    (require 'jsonista.core)
     true
     (catch Throwable _ false)))
 
@@ -89,23 +89,22 @@
     (.toByteArray output)))
 
 (defn ^:dynamic json-encode
-  "Resolve and apply cheshire's json encoding dynamically."
-  [& args]
+  "Resolve and apply jsonista's json encoding dynamically."
+  [value options]
   {:pre [json-enabled?]}
-  (apply (ns-resolve (symbol "cheshire.core") (symbol "encode")) args))
-
-(defn ^:dynamic json-decode
-  "Resolve and apply cheshire's json decoding dynamically."
-  [& args]
-  {:pre [json-enabled?]}
-  (apply (ns-resolve (symbol "cheshire.core") (symbol "decode")) args))
+  (let [write-fn (ns-resolve (symbol "jsonista.core") (symbol "write-value-as-string"))]
+    (if options
+      (let [mapper ((ns-resolve (symbol "jsonista.core") (symbol "object-mapper")) options)]
+        (write-fn value mapper))
+      (write-fn value))))
 
 (defn ^:dynamic json-decode-strict
-  "Resolve and apply cheshire's json decoding dynamically (with lazy parsing
-  disabled)."
+  "Resolve and apply jsonista's json decoding dynamically."
   [& args]
   {:pre [json-enabled?]}
-  (apply (ns-resolve (symbol "cheshire.core") (symbol "decode-strict")) args))
+  (apply (ns-resolve (symbol "jsonista.core") (symbol "read-value")) args))
+
+(def ^:dynamic json-decode)
 
 ;;;
 
@@ -527,8 +526,8 @@
   [{:keys [form-params json-opts]}]
   (when-not json-enabled?
     (throw (ex-info (str "Can't encode form params as \"application/json\". "
-                      "Cheshire dependency not loaded.")
-             {:type :cheshire-not-loaded
+                      "jsonista dependency not loaded.")
+             {:type :jsonista-not-loaded
               :form-params form-params
               :json-opts json-opts})))
   (json-encode form-params json-opts))
