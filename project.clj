@@ -28,7 +28,7 @@
                      netty-modules))
   :profiles {:dev {:dependencies [[org.clojure/clojure "1.9.0"]
                                   [criterium "0.4.4"]
-                                  [cheshire "5.8.1"]
+                                  [metosin/jsonista "0.2.5"]
                                   [org.slf4j/slf4j-simple "1.7.25"]
                                   [com.cognitect/transit-clj "0.8.309"]]}}
   :codox {:src-dir-uri "https://github.com/ztellman/aleph/tree/master/"
