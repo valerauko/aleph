@@ -1,7 +1,7 @@
 sudo: required
-dist: trusty
 language: clojure
 script: lein do clean, jammin 300 test
 jdk:
-  - oraclejdk8
+  - oraclejdk11
   - openjdk8
+  - openjdk11
