@@ -26,11 +26,13 @@
                    (map
                      #(vector (symbol "io.netty" (str "netty-" %)) netty-version)
                      netty-modules))
-  :profiles {:dev {:dependencies [[org.clojure/clojure "1.9.0"]
-                                  [criterium "0.4.4"]
+  :profiles {:dev {:dependencies [[org.clojure/clojure "1.10.1"]
+                                  [criterium "0.4.5"]
                                   [metosin/jsonista "0.2.5"]
-                                  [org.slf4j/slf4j-simple "1.7.25"]
-                                  [com.cognitect/transit-clj "0.8.309"]]}}
+                                  [org.slf4j/slf4j-simple "1.7.28"]
+                                  [com.cognitect/transit-clj "0.8.319"]]
+                   :plugins [[lein-ancient "0.6.15"
+                              :exclusions [org.clojure/clojure]]]}}
   :codox {:src-dir-uri "https://github.com/ztellman/aleph/tree/master/"
           :src-linenum-anchor-prefix "L"
           :defaults {:doc/format :markdown}
