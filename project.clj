@@ -16,7 +16,7 @@
     [byte-streams "0.2.5-alpha2"]
     [potemkin "0.4.5"]])
 
-(defproject aleph "0.4.7-alpha5"
+(defproject social.kitsune/iny "1.0.0"
   :description "a framework for asynchronous communication"
   :repositories {"jboss" "https://repository.jboss.org/nexus/content/groups/public/"
                  "sonatype-oss-public" "https://oss.sonatype.org/content/groups/public/"}
@@ -34,16 +34,16 @@
   :codox {:src-dir-uri "https://github.com/ztellman/aleph/tree/master/"
           :src-linenum-anchor-prefix "L"
           :defaults {:doc/format :markdown}
-          :include [aleph.tcp
-                    aleph.udp
-                    aleph.http
-                    aleph.flow]
+          :include [iny.tcp
+                    iny.udp
+                    iny.http
+                    iny.flow]
           :output-dir "doc"}
   :plugins [[lein-codox "0.9.4"]
             [lein-jammin "0.1.1"]
             [lein-marginalia "0.9.0"]
             [ztellman/lein-cljfmt "0.1.10"]]
-  :java-source-paths ["src/aleph/utils"]
+  :java-source-paths ["src/iny/utils"]
   :javac-options ["-target" "1.7", "-source" "1.7"]
   :cljfmt {:indents {#".*" [[:inner 0]]}}
   :test-selectors {:default #(not
