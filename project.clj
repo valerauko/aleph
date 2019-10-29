@@ -42,7 +42,6 @@
                     iny.flow]
           :output-dir "doc"}
   :plugins [[lein-codox "0.9.4"]
-            [lein-jammin "0.1.1"]
             [lein-marginalia "0.9.0"]
             [ztellman/lein-cljfmt "0.1.10"]]
   :java-source-paths ["src/iny/utils"]
